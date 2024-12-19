@@ -1,25 +1,21 @@
-<!DOCTYPE html>
+<?php
+$cookie_name = "user";
+$cookie_value = "Oxford";
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+?>
+
 <html>
-<head>
- <title> Cookie Handler</title>
-</head>
+<html>
 <body>
- <?php
-  if($_SERVER["REQUEST_METHOD"] == "POST") {
-    setcookie("username", $_POST['username'], time() + (10 * 30), "/");
-	echo "<p>Cookie set. Reload the  page to see the cookie value.</p>";
- }
- if(isset($_COOKIE["username"])){
-    echo "<p> Welcome back, " . htmlspecialchars($_COOKIE["username"]) . "!</p>";
+
+<?php
+if (!isset($_COOKIE[$cookie_name])) {
+    echo "Cookie is not set.";
+} else {
+    echo "Cookie is set.<br>";
+    echo "Value: " . $_COOKIE[$cookie_name];
 }
-else {
-  echo "<p> Welcome, guest!</p>";
-  }
-  ?>
-  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <label for="username"> Enter your name:</label><br>
-	<input type="text" id="username" name="username"><br>
-	<input type="submit" value="Set Cookie">
-	</form>
-  </body>
- </html>
+?>
+
+</body>
+</html>
